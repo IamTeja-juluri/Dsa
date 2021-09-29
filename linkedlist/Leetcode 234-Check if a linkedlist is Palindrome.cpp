@@ -32,6 +32,7 @@ public:
 };
 //Approach 2-IMP  Optimal
 /* Here we divide list into two halves(left and Right).We reverse the right half of list and then compare the elements of first list and second list .For eg:first element of first half is checked with first element of second half
+and then after checking we reverse second half den return the head (we should ensure that list is not modified) while  returning */
 
 
 class Solution {
