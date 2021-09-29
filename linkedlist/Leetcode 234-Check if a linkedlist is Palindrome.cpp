@@ -1,4 +1,4 @@
-//Two approaches
+//Three approaches
 //Approach 1
 class Solution {
 public:
@@ -81,3 +81,31 @@ public:
     }
 };
 
+//Approach 3 Recursive imp
+//gfg soln
+bool isPalindromeUtil(struct node** left, struct node* right)
+{
+    /* stop recursion when right becomes NULL */
+    if (right == NULL)
+        return true;
+ 
+    /* If sub-list is not palindrome then no need to
+    check for current left and right, return false */
+    bool isp = isPalindromeUtil(left, right->next);
+    if (isp == false)
+        return false;
+ 
+    /* Check values at current left and right */
+    bool isp1 = (right->data == (*left)->data);
+ 
+    /* Move left to next node */
+    *left = (*left)->next;
+ 
+    return isp1;
+}
+ 
+// A wrapper over isPalindromeUtil()
+bool isPalindrome(struct node* head)
+{
+    isPalindromeUtil(&head, head);
+}
