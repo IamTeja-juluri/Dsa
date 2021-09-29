@@ -1,2 +1,2 @@
-# LeetcodeSolutions
+#Coding Interviews
 DSA
