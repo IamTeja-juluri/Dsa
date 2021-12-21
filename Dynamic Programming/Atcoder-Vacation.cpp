@@ -11,13 +11,13 @@ vector<int> a,b,c;
 vector<int> dpa,dpb,dpc;
 
 int solveA(int n){
-    
-    if(dpa[n]!=-1)
-    return dpa[n];
-    
+      
     if(n==0){
         return dpa[n]=a[n];
     }
+    
+    if(dpa[n]!=-1)
+    return dpa[n];
     
     return dpa[n]=max(solveB(n-1),solveC(n-1))+a[n];
     
@@ -25,14 +25,14 @@ int solveA(int n){
 
 
 int solveB(int n){
-    
-    if(dpb[n]!=-1)
-    return dpb[n];
-    
+     
     if(n==0){
         return dpb[n]=b[n];
     }
-    
+     
+    if(dpb[n]!=-1)
+    return dpb[n];
+ 
     return dpb[n]=max(solveA(n-1),solveC(n-1))+b[n];
     
 }
@@ -40,14 +40,14 @@ int solveB(int n){
 
 int solveC(int n){
     
-    if(dpc[n]!=-1){
-        return dpc[n];
-    }
-    
+   
     if(n==0){
         return dpc[n]=c[n];
     }
-    
+   
+     if(dpc[n]!=-1){
+        return dpc[n];
+    }
     
     return dpc[n]=max(solveA(n-1),solveB(n-1))+c[n];
     
