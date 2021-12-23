@@ -10,7 +10,7 @@ int main(){
     
     for(long long i=0;i<n;i++){
         
-        for(int j=0;j<m;j++){
+        for(long long j=0;j<m;j++){
             cin>>a[i][j];
         }
     }
