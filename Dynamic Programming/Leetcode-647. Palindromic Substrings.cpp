@@ -7,6 +7,7 @@ public:
         int n=s.size();
         
       //odd length substrings
+       //Treat every idx as middle element and expand towards left and right only if it is substring and keep track of bounds and do the same for even length
         for(int i=0;i<n;i++){
             int l=i,r=i;
             while(l>=0 && r<n){
