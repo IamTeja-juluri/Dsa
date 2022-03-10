@@ -32,3 +32,53 @@ public:
         return ans==INT_MAX?-1:ans;
     }
 };
+
+//Same code but in diff way(gives tle)
+class Solution {
+public:
+    
+    vector<vector<int>>dp; 
+    
+    int findMin(vector<int>&nums,int x,int i,int j){
+        
+        if(x==0)
+          return 0;   
+        
+        if(i>j || x<0)
+            return INT_MAX-1;
+        
+         if(dp[i][j]!=-1)
+            return dp[i][j];
+       
+        int l1=1+findMin(nums,x-nums[i],i+1,j);
+    
+        int r1=1+findMin(nums,x-nums[j],i,j-1);
+    
+        return dp[i][j]=min(l1,r1);   
+    }
+
+    
+    
+    int minOperations(vector<int>& nums, int x) {
+     
+        int n=nums.size();
+        dp=vector<vector<int>>(n+1,vector<int>(n+1,-1));
+        int ans=findMin(nums,x,0,n-1);
+        return ans==INT_MAX?-1:ans;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
