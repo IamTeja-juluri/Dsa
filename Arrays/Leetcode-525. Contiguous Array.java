@@ -1,3 +1,4 @@
+//soln2 is imp
 //java
 class Solution {
     public int findMaxLength(int[] nums) {
@@ -20,6 +21,36 @@ class Solution {
             }
             mp.put(pref,i);
         }
+        return ans;
+    }
+}
+
+//soln2 
+class Solution {
+    public int findMaxLength(int[] nums) {
+        
+        
+        int pref=0;
+        int ans=0;
+        
+        int n=nums.length;
+        Map<Integer,Integer> mp=new HashMap<Integer,Integer>();
+        for(int i=0;i<n;i++){
+            if(nums[i]==1)
+                pref+=1;
+            else
+                pref-=1;
+            if(pref==0)
+                ans=i+1;
+            if(mp.get(pref)!=null){
+                ans=Math.max(ans,i-mp.get(pref));
+                continue;
+            }
+            mp.put(pref,i);
+        }
+        
+        
+        
         return ans;
     }
 }
