@@ -14,7 +14,7 @@ public:
         
         priority_queue<pair<double,int> >pq;
         
-        dist[src]=0.0;
+        dist[src]=1.0;
         pq.push({1.0,src});
         
         while(!pq.empty()){
@@ -28,8 +28,8 @@ public:
                 double nbrwt=nbrPair.second;
                 int nbr=nbrPair.first;
                 
-                if(dist[nbr]<(nodewt*nbrwt)){
-                    dist[nbr]=nodewt*nbrwt;
+                if(dist[nbr]<(dist[node]*nbrwt)){
+                    dist[nbr]=dist[node]*nbrwt;
                     pq.push({dist[nbr],nbr});
                 }
             
