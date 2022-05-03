@@ -1,3 +1,27 @@
+//Soln using maps
+class Solution {
+public:
+    int threeSumMulti(vector<int>& a, int target) {
+       
+        unordered_map<int,int> mp;
+        
+        int count=0;
+        int mod=1e9+7;
+        
+        for(int i=0;i<a.size();i++){
+            
+           count=(count+mp[target-a[i]])%mod;
+           for(int j=0;j<i;j++)
+               mp[a[i]+a[j]]++;
+            
+        }
+       
+        return count;
+    }
+};
+
+
+
 //Soln using two ptrs
 
 class Solution {
