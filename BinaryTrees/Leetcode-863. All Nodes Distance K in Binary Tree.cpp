@@ -1,3 +1,4 @@
+//App 1 using level order
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -90,6 +91,85 @@ public:
            res.push_back(q.front()->val);
             q.pop();
         }
+        return res;
+    }
+};
+
+// app2 without level order
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    
+ 
+    unordered_map<TreeNode*,TreeNode* >mp;
+     vector<int> res;
+    unordered_map<TreeNode*,bool> visited;
+
+  
+    void mark(TreeNode* root){
+        
+        if(root==NULL)
+            return;
+        
+        if(root->left){
+            mp[root->left]=root;
+            mark(root->left);
+        }
+        
+        if(root->right){
+            mp[root->right]=root;
+            mark(root->right);
+        }
+        
+        return;
+    }
+    
+    void findNodes(TreeNode* root,int k){
+        
+        if(root==NULL)
+            return;
+        
+        if(visited[root])
+            return;
+        
+        if(k==0){
+            res.push_back(root->val);
+            return;
+        }
+        
+        visited[root]=true;
+        
+        if(root->left)
+            findNodes(root->left,k-1);
+        
+         if(root->right)
+            findNodes(root->right,k-1);
+        
+         if(mp[root])
+            findNodes(mp[root],k-1);
+        
+        return;
+    }
+    
+    
+    
+    
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        
+        if(root==NULL)
+            return res;
+        
+        mark(root);
+        findNodes(target,k);
+        
         return res;
     }
 };
