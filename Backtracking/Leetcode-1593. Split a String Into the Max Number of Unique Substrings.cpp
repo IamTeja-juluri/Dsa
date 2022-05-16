@@ -1,4 +1,5 @@
-class Solution {
+
+1)class Solution {
 public:
     
       unordered_set<string> st;
@@ -31,6 +32,42 @@ int maxUniqueSplit(string str) {
     ans= 0;
     
     solve(0,str);
+    
+    return ans;
+}
+};
+2)class Solution {
+public:
+    
+      unordered_set<string> st;
+      int ans;
+   void solve(int idx, string s,int c)
+   {
+       
+       if(idx==s.size()){
+           ans=max(ans,c);
+           return;
+       }
+      
+   
+    for(int i=idx; i<s.length(); i++)
+    {
+        string x=s.substr(idx,i-idx+1);
+        if(st.find(x) == st.end())
+        {
+            st.insert(x);
+            solve(i+1,s,c+1);
+            st.erase(x);
+        }
+    }
+}
+
+int maxUniqueSplit(string str) {
+    
+  
+    ans= 0;
+    
+    solve(0,str,0);
     
     return ans;
 }
