@@ -62,3 +62,46 @@ class Solution {
         
     }
 }
+
+//java
+class Solution {
+    public int maxVowels(String s, int k) {
+     
+         int ans=0;
+        int len=0;
+        
+         HashSet<Character> hs=new HashSet<>();
+        
+        hs.add('a');
+        hs.add('e');
+        hs.add('i');
+        hs.add('o');
+        hs.add('u');
+        
+        for(int i=0;i<k;i++){
+            
+            char ch=s.charAt(i);
+            
+            if(hs.contains(ch))
+                len+=1;
+        }
+        
+        ans=len;
+       
+        for(int i=0,j=k;j<s.length();i++,j++){
+            
+            char ch1=s.charAt(i);
+            char ch2=s.charAt(j);
+            if(hs.contains(ch1))
+                len-=1;
+             if(hs.contains(ch2))
+                len+=1;
+             ans=Math.max(ans,len);    
+           
+        }
+        
+        return ans;
+        
+        
+    }
+}
