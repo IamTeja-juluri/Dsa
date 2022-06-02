@@ -1,3 +1,4 @@
+//binary search approach
 class Solution {
     
     int binarySearch(int[] nums,int low,int high,int key){
