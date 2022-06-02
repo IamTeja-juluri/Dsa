@@ -1,3 +1,97 @@
+//Multiple approaches
+//recursive app 1
+#include<bits/stdc++.h>
+using namespace std;
+    
+vector<vector<vector<int> > > dp;
+
+int computeMaxProfit(vector<vector<int> > &grid,int mask,int x,int y,int n){
+        
+    if( x>=n )
+       return 0;
+       
+    if(dp[x][y][mask]!=-1)
+    return dp[x][y][mask];
+    
+    if(mask==0)
+        return dp[x][y][mask]=grid[x][y]+max(computeMaxProfit(grid,1,x+1,y+1,n),computeMaxProfit(grid,2,x+1,y+2,n));
+        
+    if(mask==1)
+       return dp[x][y][mask]=grid[x][y]+max(computeMaxProfit(grid,0,x+1,y-1,n),computeMaxProfit(grid,2,x+1,y+1,n));
+    
+    return dp[x][y][mask]=grid[x][y]+max(computeMaxProfit(grid,0,x+1,y-2,n),computeMaxProfit(grid,1,x+1,y-1,n));
+     
+  }
+    
+    int main(){
+        
+      int n;
+      cin>>n;
+      
+      vector<vector<int> > grid(n,vector<int>(3));
+      dp.resize(n,vector<vector<int> >(3,vector<int>(3,-1)));
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<3;j++){
+              int x;
+              cin>>x;
+              grid[i][j]=x;
+            }
+        }
+            
+        int ans=max({computeMaxProfit(grid,0,0,0,n),computeMaxProfit(grid,1,0,1,n),computeMaxProfit(grid,2,0,2,n)});
+        
+        cout<<ans<<endl;
+        
+}
+//memoization of above app
+#include<bits/stdc++.h>
+using namespace std;
+    
+vector<vector<int> > dp;
+
+
+    int main(){
+        
+      int n;
+      cin>>n;
+      
+      int ans=INT_MIN;
+      vector<vector<int> > grid(n,vector<int>(3));
+      dp.resize(n,vector<int>(3,-1));
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<3;j++){
+              int x;
+              cin>>x;
+              grid[i][j]=x;
+              if(i==0)
+               dp[i][j]=x;
+            }
+        }
+    
+      for(int i=1;i<n;i++){
+          for(int j=0;j<3;j++){
+              if(j==0)
+                  dp[i][j]=grid[i][j]+max(dp[i-1][j+1],dp[i-1][j+2]);
+              else if(j==1)
+                  dp[i][j]=grid[i][j]+max(dp[i-1][j-1],dp[i-1][j+1]);
+              else
+                 dp[i][j]=grid[i][j]+max(dp[i-1][j-1],dp[i-1][j-2]);
+          }
+      }
+        
+     
+      for(int i=0;i<n;i++){
+          for(int j=0;j<3;j++)
+          ans=max(ans,dp[i][j]);
+      }
+    
+    cout<<ans<<endl;
+}
+    
+    
+    
 //Memoization
 #include<bits/stdc++.h>
 using namespace std;
