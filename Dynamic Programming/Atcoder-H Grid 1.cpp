@@ -1,3 +1,46 @@
+//recursive+memo
+#include<bits/stdc++.h>
+using namespace std;
+    
+vector<vector<int> > dp;
+
+int countWays(vector<vector<char> > &grid,int x,int y,int n,int m){
+        
+    if(x>=n || y>=m || grid[x][y]!='.')
+       return 0;
+       
+    if(dp[x][y]!=-1)
+    return dp[x][y];
+        
+     if(x==n-1 && y==m-1)
+        return dp[x][y]=1;
+        
+     return dp[x][y]=(countWays(grid,x,y+1,n,m)+countWays(grid,x+1,y,n,m))%(int)(1e9+7);   
+  }
+    
+    int main(){
+        
+      int n,m;
+      cin>>n>>m;
+      
+      vector<vector<char> > grid(n,vector<char>(m));
+      dp.resize(n,vector<int>(m,-1));
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+              char x;
+              cin>>x;
+              grid[i][j]=x;
+            }
+    }
+            
+        int ans=countWays(grid,0,0,n,m);
+        cout<<ans<<endl;
+        
+        
+}
+
+//tabulation
 #include<bits/stdc++.h>
 using namespace std;
 #define mod 1000000007
