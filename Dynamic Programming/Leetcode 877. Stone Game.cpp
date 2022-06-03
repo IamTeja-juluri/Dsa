@@ -68,3 +68,44 @@ public:
       
     }
 };
+
+//app3
+class Solution {
+public:
+    
+    int dp[500+1][500+1][2];
+    int knapsack(vector<int>&arr,int i,int j,
+                 int chance)
+    {
+        if(i>j)
+            return 0;
+        if(dp[i][j][chance]!=-1)
+            return dp[i][j][chance];
+        if(chance==1)
+        {
+            return dp[i][j][chance]= max(arr[i]+knapsack(arr,i+1,j,0),
+                     arr[j]+knapsack(arr,i,j-1,0));
+        }
+        if(chance==0)
+        {
+            return dp[i][j][chance]= min(knapsack(arr,i+1,j,1),
+                     knapsack(arr,i,j-1,1));
+        }
+        return 0;
+    }
+    
+    bool stoneGame(vector<int>& piles) {
+        memset(dp,-1,sizeof dp);
+        int sum=0;
+        for(auto i : piles)
+        {
+            sum+=i;
+        }
+        int sum1=knapsack(piles,0,piles.size()-1,1);
+        int sum2=sum-sum1;
+        if(sum1>sum2)
+            return true;
+        return false;
+        
+    }
+};
