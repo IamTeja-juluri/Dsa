@@ -77,3 +77,63 @@ class Solution {
         
     }
 }
+//app3
+class Solution {
+public:
+    
+    int dp[1000][1000][2];
+    vector<int>pre,suf;
+    
+    int recurs(int i,int j,int chance)
+    {
+        if(i>j)
+        {
+            return 0;
+        }
+        
+        if(dp[i][j][chance]!=-1)
+        {
+            return dp[i][j][chance];
+        }
+        
+        if(chance==0)
+        {
+            return dp[i][j][chance]=max(recurs(i+1,j,1)+pre[j]-pre[i],recurs(i,j-1,1)+suf[i]-suf[j]);
+        }
+        if(chance==1)
+        {
+            return dp[i][j][chance]=min(recurs(i+1,j,0)-pre[j]+pre[i],recurs(i,j-1,0)-suf[i]+suf[j]);
+        }
+        
+        return 0;
+    }
+    
+
+    
+    int stoneGameVII(vector<int>& stones) {
+        
+        memset(dp,-1,sizeof(dp));
+        
+        pre.resize(stones.size(),0);
+        suf.resize(stones.size(),0);
+        
+        int sum=0;
+        for(int i=0;i<stones.size();i++)
+        {
+            sum+=stones[i];
+            pre[i]=sum;
+        }
+        sum=0;
+        
+        for(int i=stones.size()-1;i>=0;i--)
+        {
+            sum+=stones[i];
+            suf[i]=sum;
+        }
+        
+     
+        int diff=recurs(0,stones.size()-1,0);
+
+        return diff;
+    }
+};
