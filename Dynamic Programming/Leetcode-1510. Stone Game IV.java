@@ -1,3 +1,33 @@
+//straight forward gametheory table filling
+//tabulation
+class Solution {
+public:
+    bool winnerSquareGame(int n) {
+        //straight forward soln
+        int dp[n+1];
+        dp[0]=0; // loosing state
+        dp[1]=1; // winning state
+        for(int i =2; i<= n ; i++)
+        {
+            for( int j=1; j*j <= i; j++)
+            {
+                int x=j*j;
+                if( dp[i-x] ==false)
+                {
+                    dp[i]=true; //its a winning state
+                    break; 
+                }
+                dp[i]=false;
+            }
+        }
+        
+        return dp[n];
+    }
+};
+
+
+
+//Recursive
 class Solution {
     
     int findWinner(int[] dp,int n){
@@ -25,6 +55,8 @@ class Solution {
     
     public boolean winnerSquareGame(int n) {
      
+        
+   
         int[] dp=new int[n+1];
         
         Arrays.fill(dp,-1);
