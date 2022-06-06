@@ -12,7 +12,21 @@ class Solution {
     
     //idea is to reverse second half of list
     //or we can use stack
-    
+    //recursive
+    ListNode reverse(ListNode head){
+       
+        if(head==null)
+            return null;
+        
+        if(head.next==null)
+            return head;
+        
+        ListNode temp=reverse(head.next);
+        head.next.next=head;
+        head.next=null;
+        return temp;
+    }
+    //iterative
     ListNode reverse(ListNode head){
         
         ListNode curr=head;
