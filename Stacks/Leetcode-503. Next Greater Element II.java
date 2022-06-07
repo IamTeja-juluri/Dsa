@@ -1,5 +1,8 @@
 class Solution {
 public:
+    
+    // idea is to append array to itself so that it will use circular property
+    
     vector<int> nextGreaterElements(vector<int>& nums) {
         
        int n=nums.size();
