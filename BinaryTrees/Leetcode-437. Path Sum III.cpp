@@ -1,15 +1,4 @@
 //app1 -basic dfs
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 class Solution {
 public:
     
@@ -33,5 +22,39 @@ public:
             return 0;
        
        return findPath(root,targetSum)+ pathSum(root->left,targetSum)+ pathSum(root->right,targetSum);  
+    }
+};
+//app2 using prefix sum
+
+class Solution {
+public:
+    
+    unordered_map<long long,int> mp;
+    long long ans;
+    
+    void findPath(TreeNode* root,long long sum,long long targetSum){
+        
+        if(root==NULL)
+            return ;
+        
+        long long currSum=sum+root->val;
+        ans+=mp[currSum-targetSum];
+        mp[currSum]+=1;
+        
+        findPath(root->left,currSum,targetSum);
+        findPath(root->right,currSum,targetSum); 
+        mp[currSum]-=1;
+        
+    }
+ 
+    
+    int pathSum(TreeNode* root, int targetSum) {
+        
+       if(root==NULL)
+            return 0;
+       mp[0]=1;
+       ans=0;
+       findPath(root,0,targetSum);  
+       return ans;
     }
 };
