@@ -1,6 +1,6 @@
 class Solution {
 public:
-    
+    //tc:logn
     map<int,int> mp; // using maps to avoid tle
     
     int helper(int n){
