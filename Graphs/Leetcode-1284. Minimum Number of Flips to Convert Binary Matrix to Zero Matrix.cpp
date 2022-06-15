@@ -55,8 +55,8 @@ public:
                 
                 visited.insert(v);
                 
-                for(int j=0;j<mat.size();j++){
-                    for(int k=0;k<mat[0].size();k++){
+                for(int j=0;j<v.size();j++){
+                    for(int k=0;k<v[0].size();k++){
                         vector<vector<int> > r=flipMatrix(v,j,k);
                         q.push(r);
                     }
