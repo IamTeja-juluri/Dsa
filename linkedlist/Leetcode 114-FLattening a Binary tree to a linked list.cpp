@@ -41,8 +41,43 @@ public:
     }
 };
 
+//approch 2-Recursion
 
-//Approach 2
+class Solution {
+public:
+    
+    TreeNode* helper(TreeNode* root){
+        
+        if(root==NULL)
+            return NULL;
+        
+        
+        TreeNode* curr_left=helper(root->left);
+        TreeNode* curr_right=helper(root->right);
+        
+        root->right=curr_left;
+        root->left=NULL;
+        
+        TreeNode* curr=root;
+        
+        while(curr->right)
+            curr=curr->right;
+        
+        curr->right=curr_right;
+        
+        return root;
+        
+    }
+    
+    
+    void flatten(TreeNode* root) {
+        
+        root=helper(root);
+        return;
+    }
+};
+
+//Approach 3
 
 class Solution {
 public:
