@@ -1,3 +1,4 @@
+//find forward kadanes n backward kadanes 
 class Solution {
 public:
     
