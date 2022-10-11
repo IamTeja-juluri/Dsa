@@ -1,3 +1,27 @@
+//using recursion
+class Solution {
+public:
+    
+    ListNode* helper(ListNode* node,int &n){
+        
+        if(node==NULL)
+            return NULL;
+        
+        node->next=helper(node->next,n);
+        n-=1;
+        if(n==0)
+            return node->next;
+        
+        return node;
+    } 
+    
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if(head==NULL)
+            return NULL;
+        return helper(head,n);
+    }
+};
+
 //approach 1
 class Solution {
 public:
