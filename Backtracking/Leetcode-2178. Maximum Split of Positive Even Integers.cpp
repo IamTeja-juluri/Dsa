@@ -1,3 +1,4 @@
+//Backtracking soln-TLE
 class Solution {
 public:
     
@@ -34,3 +35,23 @@ public:
         
     }
 };
+//GReedy soln-ac
+vector<long long> maximumEvenSplit(long long finalSum) {
+        
+        if(finalSum%2==1)
+            return {};
+        
+        vector<long long> ans;
+        
+        long long i=2,curr_sum=0;
+        
+        while(curr_sum+i<=finalSum){
+            ans.push_back(i);
+            curr_sum+=i;
+            i+=2;
+        }
+        
+        ans[ans.size()-1]+=finalSum-curr_sum;
+        return ans;
+        
+    }
