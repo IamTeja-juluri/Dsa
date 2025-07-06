@@ -38,6 +38,41 @@ var binaryTreePaths = function(root) {
     return l;
 };
 
+// GO
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
+ func pathFinder(root *TreeNode,ans string,result *[]string){
+    if root == nil{
+        return;
+    }
+    if root.Left==nil && root.Right==nil{
+        *result = append(*result,ans)
+        return;
+    }
+    if root.Left != nil {
+        pathFinder(root.Left,ans+"->"+strconv.Itoa(root.Left.Val),result)
+    }
+    if root.Right != nil {
+        pathFinder(root.Right,ans+"->"+strconv.Itoa(root.Right.Val),result)
+    }
+ }
+
+func binaryTreePaths(root *TreeNode) []string {
+   var result [] string
+   if root == nil {
+        return result
+    }
+    pathFinder(root,strconv.Itoa(root.Val),&result)
+    return result
+}
+
 // CPP
 
 /**
